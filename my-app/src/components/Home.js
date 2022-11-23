@@ -25,14 +25,17 @@ function Home() {
 
     setValueInput(event.target.value); // Ricopia i valori digitati nello stato dell'input 
 
-    switch (toggleData) {
-      case 0:
+    switch (toggleData) { // Controllo se il bottone per IN STOCK / OUT OF STOCK è stato premuto
+      case 0: // Se è premuto OUT OF STOCK:
+        // Filtro gli elementi solo OUT OF STOCK e che abbiano una corrispondenza con il nome digitato
         setObjData(startingArray.filter(element => element.availability.stock === 0 && element.name.toLowerCase().includes(event.target.value.toLowerCase())));
         break;
-      case 1:
+      case 1: // Se è premuto IN STOCK:
+        // Filtro gli elementi solo IN STOCK e che abbiano una corrispondenza con il nome digitato
         setObjData(startingArray.filter(element => element.availability.stock > 0 && element.name.toLowerCase().includes(event.target.value.toLowerCase())))
         break;
-      default:
+      default: // Se non è stato premuto:
+        // Filtro gli elementi che abbiano una corrispondenza con il nome digitato
         setObjData(startingArray.filter(element => element.name.toLowerCase().includes(event.target.value.toLowerCase())));
     }
   }
