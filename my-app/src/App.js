@@ -13,15 +13,24 @@ const App = () => {
 
     useEffect(() => {
         fetch('https://assets.fc-dev.instore.oakley.com/assets/products/products.json')
-            .then(response => response.json())
+            .then((response) => {
+                if (response.ok) {
+                    return response.json()
+                }
+                //throw new Error('Something went wrong');
+                return Promise.reject(response); //reject instead of throw Error
+            })
             .then(json => {
                 setStartingArray(json)
                 setLoading(false)
             })
+            .catch((error) => {
+                console.log(error)
+            });
     }, [])
 
     if (isLoading) {
-        return <Loading/>
+        return <Loading />
     }
 
     return (
