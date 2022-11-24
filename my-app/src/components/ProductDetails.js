@@ -1,24 +1,17 @@
 import { useParams, Link } from "react-router-dom";
-import { useState, useEffect } from 'react';
 import React from 'react';
 import { UserContext } from "../App";
 import Loading from './Loading';
 
 const ProductDetails = () => {
 
-    const [productData, setStartingArray] = useState([]);
-
     const { idCode } = useParams();
 
     const startingArray = React.useContext(UserContext);
 
-    useEffect(() => {
-        let objectFiltered = startingArray.filter(element => parseInt(element.UPC) === parseInt(idCode))
-        setStartingArray(objectFiltered)
-        // eslint-disable-next-line
-    }, [])
+    let objectFiltered = startingArray.find(element => parseInt(element.UPC) === parseInt(idCode))
 
-    if(productData.length === 0){
+    if(objectFiltered === null){
         return <Loading/>
     }
 
@@ -33,9 +26,9 @@ const ProductDetails = () => {
                     </div>
                     <div className='bottomCard'>
                         <ul>
-                            <li className='element-name'>{productData[0].name}</li>
-                            <li className='element-price'>$ {productData[0].price.current.value}</li>
-                            {productData[0].availability.stock > 0 ? <li className='element-stock'><span>in stock</span></li> : <li className='d-none'></li>}
+                            <li className='element-name'>{objectFiltered.name}</li>
+                            <li className='element-price'>$ {objectFiltered.price.current.value}</li>
+                            {objectFiltered.availability.stock > 0 ? <li className='element-stock'><span>in stock</span></li> : <li className='d-none'></li>}
                         </ul>
                     </div>
                 </div>
