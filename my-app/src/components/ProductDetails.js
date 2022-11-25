@@ -15,6 +15,10 @@ const ProductDetails = () => {
         return <Loading/>
     }
 
+    if(objectFiltered === undefined){
+        return <h1>No elements to display</h1>
+    }
+    
     return (
         <>
             <div className='listProduct'>
