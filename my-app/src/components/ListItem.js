@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 
 const ListItem = ({element}) => {
-    console.log(element)
     return (
         <li className='listProduct'>
             <Link to={`/product/${element.UPC}`}>

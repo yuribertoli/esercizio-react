@@ -1,16 +1,16 @@
 import { Outlet } from "react-router-dom";
 import React from 'react';
 import Footer from './components/Footer';
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import Loading from "./components/Loading";
-import { connect } from "react-redux";
-
-export const UserContext = React.createContext();
+import { connect, useSelector, useDispatch } from "react-redux";
+import { startingData, setLoading } from "./store/actions";
 
 const App = () => {
 
-    const [startingArray, setStartingArray] = useState([]);
-    const [isLoading, setLoading] = useState(true);
+    const dispatch = useDispatch();
+
+    const isLoading = useSelector(state => state.isLoading);
 
     useEffect(() => {
         fetch('https://assets.fc-dev.instore.oakley.com/assets/products/products.json')
@@ -22,12 +22,13 @@ const App = () => {
                 return Promise.reject(response); //reject instead of throw Error
             })
             .then(json => {
-                setStartingArray(json)
-                setLoading(false)
+                dispatch(startingData(json))
+                dispatch(setLoading(false))
             })
             .catch((error) => {
                 console.log(error)
             });
+    // eslint-disable-next-line
     }, [])
 
     if (isLoading) {
@@ -37,9 +38,7 @@ const App = () => {
     return (
         <div id="container">
 
-            <UserContext.Provider value={startingArray}>
-                <Outlet />
-            </UserContext.Provider>
+            <Outlet />
 
             <footer>
                 <Footer />
@@ -47,6 +46,6 @@ const App = () => {
 
         </div>
     )
-};
+}
 
 export default connect(store => store)(App);

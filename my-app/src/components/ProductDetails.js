@@ -1,15 +1,16 @@
 import { useParams, Link } from "react-router-dom";
 import React from 'react';
-import { UserContext } from "../App";
 import Loading from './Loading';
+import { useSelector } from "react-redux";
+
 
 const ProductDetails = () => {
 
     const { idCode } = useParams();
 
-    const startingArray = React.useContext(UserContext);
+    const startingData = useSelector(state => state.startingData);
 
-    let objectFiltered = startingArray.find(element => parseInt(element.UPC) === parseInt(idCode))
+    let objectFiltered = startingData.find(element => parseInt(element.UPC) === parseInt(idCode))
 
     if(objectFiltered === null){
         return <Loading/>
