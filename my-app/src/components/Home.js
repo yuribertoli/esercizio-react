@@ -22,19 +22,16 @@ function Home() {
   // Funzione per filtrare i prodotti da mostrare in base all'input dell'utente
   const filterProducts = (event) => {
 
-    setValueInput(event.target.value); // Ricopia i valori digitati nello stato dell'input 
+    setValueInput(event.target.value); 
 
-    switch (toggleData) { // Controllo se il bottone per IN STOCK / OUT OF STOCK è stato premuto
-      case 0: // Se è premuto OUT OF STOCK:
-        // Filtro gli elementi solo OUT OF STOCK e che abbiano una corrispondenza con il nome digitato
+    switch (toggleData) { 
+      case 0: 
         setObjData(startingArray.filter(element => element.availability.stock === 0 && element.name.toLowerCase().includes(event.target.value.toLowerCase())));
         break;
-      case 1: // Se è premuto IN STOCK:
-        // Filtro gli elementi solo IN STOCK e che abbiano una corrispondenza con il nome digitato
+      case 1: 
         setObjData(startingArray.filter(element => element.availability.stock > 0 && element.name.toLowerCase().includes(event.target.value.toLowerCase())))
         break;
-      default: // Se non è stato premuto:
-        // Filtro gli elementi che abbiano una corrispondenza con il nome digitato
+      default: 
         setObjData(startingArray.filter(element => element.name.toLowerCase().includes(event.target.value.toLowerCase())));
     }
   }
@@ -42,7 +39,7 @@ function Home() {
   // Funzione per resettare i valori nell'input di filtraggio e mostrare tutti i prodotti
   const resetSearch = () => {
     setToggleData(null);
-    setClassToggleLeft(''); // resetto le classi CSS
+    setClassToggleLeft(''); 
     setClassToggleRight('');
     setValueInput('');
     setObjData(startingArray);
@@ -50,19 +47,18 @@ function Home() {
 
   // Funzione per filtrare i prodotti in base alla loro quantità in stock
   const checkIfInStock = (value) => {
-    if (toggleData === value) { // Value viene passato dalla funzione e sarà sempre 0 o 1 (bottone di destra o sinistra)
-      // Qui controllo se il bottone è già stato schiacciato 
+    if (toggleData === value) { 
       setObjData(startingArray);
       setToggleData(null);
-      setClassToggleLeft(''); // resetto le classi CSS
+      setClassToggleLeft(''); 
       setClassToggleRight('');
 
-    } else { // Se non è già stato cliccato, controllo che bottone è
+    } else {
 
       if (value === 1) { // Bottone IN STOCK
         setObjData(startingArray.filter(element => element.availability.stock > 0)); // Tutti gli elementi che hanno almeno un valore di quantità
         setToggleData(1);
-        setClassToggleLeft('toggleLabel') // Aggiungo la classe CSS
+        setClassToggleLeft('toggleLabel') 
         setClassToggleRight('')
 
       } else if (value === 0) { // Bottone OUT OF STOCK

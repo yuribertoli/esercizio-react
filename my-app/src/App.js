@@ -3,6 +3,7 @@ import React from 'react';
 import Footer from './components/Footer';
 import { useEffect, useState } from "react";
 import Loading from "./components/Loading";
+import { connect } from "react-redux";
 
 export const UserContext = React.createContext();
 
@@ -48,4 +49,4 @@ const App = () => {
     )
 };
 
-export default App;
+export default connect(store => store)(App);

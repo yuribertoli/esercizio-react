@@ -1,0 +1,8 @@
+export const LOAD_DATA = 'LOAD_DATA'
+export const STARTING_DATA = 'STARTING_DATA'
+export const IS_LOADING = 'IS_LOADING'
+export const INPUT_VALUE = 'INPUT_VALUE'
+export const TOGGLE_DATA = 'TOGGLE_DATA'
+export const CLASS_TOGGLE_LEFT = 'CLASS_TOGGLE_LEFT'
+export const CLASS_TOGGLE_RIGHT = 'CLASS_TOGGLE_RIGHT'
+
