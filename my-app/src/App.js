@@ -3,7 +3,7 @@ import React from 'react';
 import Footer from './components/Footer';
 import { useEffect } from "react";
 import Loading from "./components/Loading";
-import { connect, useSelector, useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { startingData, setLoading } from "./store/actions";
 
 const App = () => {
@@ -48,4 +48,4 @@ const App = () => {
     )
 }
 
-export default connect(store => store)(App);
+export default App;

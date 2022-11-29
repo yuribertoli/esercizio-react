@@ -19,8 +19,7 @@ function Home() {
 
   useEffect(()=>{
     dispatch(setData(startingData))
-    // eslint-disable-next-line
-  }, [])
+  }, [dispatch, startingData])
 
   // Funzione per filtrare i prodotti da mostrare in base all'input dell'utente
   const filterProducts = (event) => {
