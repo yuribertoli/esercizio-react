@@ -1,5 +1,5 @@
 import '../style/App.css';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import CheckStock from './CheckStock';
 import FilterSearch from './FilterSearch';
 import ListItem from './ListItem';
