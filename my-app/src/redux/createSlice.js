@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit'
 const initialState = {
     startingData: [],
     isLoading: true,
-    loadData: [],
+    dataFiltered: [],
     valueInput: undefined,
     toggleData: null,
     classToggleLeft: '',
@@ -20,8 +20,8 @@ export const dataSlice = createSlice({
         setLoading: (state, action) => {
             state.isLoading = action.payload
         },
-        setData: (state, action) => {
-            state.loadData = action.payload
+        setDataFiltered: (state, action) => {
+            state.dataFiltered = action.payload
         },
         setValueInput: (state, action) => {
             state.valueInput = action.payload
@@ -38,6 +38,6 @@ export const dataSlice = createSlice({
     }
 })
 
-export const { setStartingData, setLoading, setData, setValueInput, setToggleData, setClassToggleLeft, setClassToggleRight } = dataSlice.actions
+export const { setStartingData, setLoading, setDataFiltered, setValueInput, setToggleData, setClassToggleLeft, setClassToggleRight } = dataSlice.actions
 
 export default dataSlice.reducer

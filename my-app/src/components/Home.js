@@ -4,21 +4,21 @@ import CheckStock from './CheckStock';
 import FilterSearch from './FilterSearch';
 import ListItem from './ListItem';
 import { useSelector, useDispatch } from "react-redux";
-import { setData, setValueInput, setToggleData, setClassToggleLeft, setClassToggleRight } from '../redux/createSlice';
+import { setDataFiltered, setValueInput, setToggleData, setClassToggleLeft, setClassToggleRight } from '../redux/createSlice';
 
 function Home() {
 
   const dispatch = useDispatch();
 
   const {startingData} = useSelector(state => state.data);
-  const {loadData} = useSelector(state => state.data);
+  const {dataFiltered} = useSelector(state => state.data);
   const {valueInput} = useSelector(state => state.data);
   const {toggleData} = useSelector(state => state.data);
   const {classToggleLeft} = useSelector(state => state.data);
   const {classToggleRight} = useSelector(state => state.data);
 
   useEffect(()=>{
-    dispatch(setData(startingData))
+    dispatch(setDataFiltered(startingData))
     // eslint-disable-next-line
   }, [])
 
@@ -29,13 +29,13 @@ function Home() {
 
     switch (toggleData) { 
       case 0: 
-        dispatch(setData(startingData.filter(element => element.availability.stock === 0 && element.name.toLowerCase().includes(event.target.value.toLowerCase()))))
+        dispatch(setDataFiltered(startingData.filter(element => element.availability.stock === 0 && element.name.toLowerCase().includes(event.target.value.toLowerCase()))))
         break;
       case 1: 
-        dispatch(setData(startingData.filter(element => element.availability.stock > 0 && element.name.toLowerCase().includes(event.target.value.toLowerCase()))))
+        dispatch(setDataFiltered(startingData.filter(element => element.availability.stock > 0 && element.name.toLowerCase().includes(event.target.value.toLowerCase()))))
         break;
       default: 
-        dispatch(setData(startingData.filter(element => element.name.toLowerCase().includes(event.target.value.toLowerCase()))))
+        dispatch(setDataFiltered(startingData.filter(element => element.name.toLowerCase().includes(event.target.value.toLowerCase()))))
     }
   }
 
@@ -45,13 +45,13 @@ function Home() {
     dispatch(setClassToggleLeft('')); 
     dispatch(setClassToggleRight(''));
     dispatch(setValueInput(''));
-    dispatch(setData(startingData));
+    dispatch(setDataFiltered(startingData));
   }
 
   // Funzione per filtrare i prodotti in base alla loro quantità in stock
   const checkIfInStock = (value) => {
     if (toggleData === value) { 
-      dispatch(setData(startingData));
+      dispatch(setDataFiltered(startingData));
       dispatch(setToggleData(null));
       dispatch(setClassToggleLeft('')); 
       dispatch(setClassToggleRight(''));
@@ -59,13 +59,13 @@ function Home() {
     } else {
 
       if (value === 1) { // Bottone IN STOCK
-        dispatch(setData(startingData.filter(element => element.availability.stock > 0))); // Tutti gli elementi che hanno almeno un valore di quantità
+        dispatch(setDataFiltered(startingData.filter(element => element.availability.stock > 0))); // Tutti gli elementi che hanno almeno un valore di quantità
         dispatch(setToggleData(1));
         dispatch(setClassToggleLeft('toggleLabel')) 
         dispatch(setClassToggleRight(''))
 
       } else if (value === 0) { // Bottone OUT OF STOCK
-        dispatch(setData(startingData.filter(element => element.availability.stock === 0))); // Solo gli elementi che non hanno valori di quantità
+        dispatch(setDataFiltered(startingData.filter(element => element.availability.stock === 0))); // Solo gli elementi che non hanno valori di quantità
         dispatch(setToggleData(0));
         dispatch(setClassToggleRight('toggleLabel'))
         dispatch(setClassToggleLeft(''))
@@ -87,9 +87,9 @@ function Home() {
       </header>
 
       <main>
-        {loadData.length === 0 ? <h1>No products found</h1> :
+        {dataFiltered.length === 0 ? <h1>No products found</h1> :
           <ul>
-            {loadData.map((element) => {
+            {dataFiltered.map((element) => {
               return <ListItem key={element.UPC} element={element} />
             })}
           </ul>
