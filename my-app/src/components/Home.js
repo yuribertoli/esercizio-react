@@ -43,7 +43,7 @@ function Home() {
 
   // Funzione per filtrare i prodotti in base alla loro quantità in stock
   const checkIfInStock = (value) => {
-    if (toggleData === value) { 
+    if (toggleData === value) {  //controllo se sto schiacciando lo stesso pulsante già selezionato in precedenza
       dispatch(setDataFiltered(startingData))
       dispatch(setToggleData(null))
       dispatch(setClassToggleLeft('')) 
