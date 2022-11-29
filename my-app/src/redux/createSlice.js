@@ -14,7 +14,7 @@ export const dataSlice = createSlice({
     name: 'data',
     initialState,
     reducers: {
-        startingData: (state, action) => {
+        setStartingData: (state, action) => {
             state.startingData = action.payload
         },
         setLoading: (state, action) => {
@@ -38,6 +38,6 @@ export const dataSlice = createSlice({
     }
 })
 
-export const { startingData, setLoading, setData, setValueInput, setToggleData, setClassToggleLeft, setClassToggleRight } = dataSlice.actions
+export const { setStartingData, setLoading, setData, setValueInput, setToggleData, setClassToggleLeft, setClassToggleRight } = dataSlice.actions
 
 export default dataSlice.reducer

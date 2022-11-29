@@ -4,7 +4,7 @@ import Footer from './components/Footer';
 import { useEffect } from "react";
 import Loading from "./components/Loading";
 import { useSelector, useDispatch } from "react-redux";
-import { startingData, setLoading } from "./redux/createSlice";
+import { setStartingData, setLoading } from "./redux/createSlice";
 
 const App = () => {
 
@@ -22,7 +22,7 @@ const App = () => {
                 return Promise.reject(response); //reject instead of throw Error
             })
             .then(json => {
-                dispatch(startingData(json))
+                dispatch(setStartingData(json))
                 dispatch(setLoading(false))
             })
             .catch((error) => {
