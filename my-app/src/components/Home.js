@@ -4,18 +4,18 @@ import CheckStock from './CheckStock';
 import FilterSearch from './FilterSearch';
 import ListItem from './ListItem';
 import { useSelector, useDispatch } from "react-redux";
-import { setData, setValueInput, setToggleData, setClassToggleLeft, setClassToggleRight } from '../store/actions';
+import { setData, setValueInput, setToggleData, setClassToggleLeft, setClassToggleRight } from '../redux/createSlice';
 
 function Home() {
 
   const dispatch = useDispatch();
 
-  const startingData = useSelector(state => state.startingData);
-  const loadData = useSelector(state => state.loadData);
-  const valueInput = useSelector(state => state.valueInput);
-  const toggleData = useSelector(state => state.toggleData);
-  const classToggleLeft = useSelector(state => state.classToggleLeft);
-  const classToggleRight = useSelector(state => state.classToggleRight);
+  const {startingData} = useSelector(state => state.data);
+  const {loadData} = useSelector(state => state.data);
+  const {valueInput} = useSelector(state => state.data);
+  const {toggleData} = useSelector(state => state.data);
+  const {classToggleLeft} = useSelector(state => state.data);
+  const {classToggleRight} = useSelector(state => state.data);
 
   useEffect(()=>{
     dispatch(setData(startingData))

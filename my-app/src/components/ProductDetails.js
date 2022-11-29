@@ -8,7 +8,7 @@ const ProductDetails = () => {
 
     const { idCode } = useParams();
 
-    const startingData = useSelector(state => state.startingData);
+    const {startingData} = useSelector(state => state.data);
 
     let objectFiltered = startingData.find(element => parseInt(element.UPC) === parseInt(idCode))
 
