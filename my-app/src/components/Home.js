@@ -1,21 +1,16 @@
-import '../style/App.css';
-import React, { useEffect } from 'react';
-import CheckStock from './CheckStock';
-import FilterSearch from './FilterSearch';
-import ListItem from './ListItem';
-import { useSelector, useDispatch } from "react-redux";
-import { setDataFiltered, setValueInput, setToggleData, setClassToggleLeft, setClassToggleRight } from '../redux/createSlice';
+import '../style/App.css'
+import React, { useEffect } from 'react'
+import CheckStock from './CheckStock'
+import FilterSearch from './FilterSearch'
+import ListItem from './ListItem'
+import { useSelector, useDispatch } from "react-redux"
+import { setInitialState, setDataFiltered, setValueInput, setToggleData, setClassToggleLeft, setClassToggleRight } from '../redux/createSlice'
 
 function Home() {
 
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
 
-  const {startingData} = useSelector(state => state.data);
-  const {dataFiltered} = useSelector(state => state.data);
-  const {valueInput} = useSelector(state => state.data);
-  const {toggleData} = useSelector(state => state.data);
-  const {classToggleLeft} = useSelector(state => state.data);
-  const {classToggleRight} = useSelector(state => state.data);
+  const {startingData, dataFiltered, valueInput, toggleData, classToggleLeft, classToggleRight} = useSelector(state => state.data)
 
   useEffect(()=>{
     dispatch(setDataFiltered(startingData))
@@ -25,15 +20,17 @@ function Home() {
   // Funzione per filtrare i prodotti da mostrare in base all'input dell'utente
   const filterProducts = (event) => {
 
-    dispatch(setValueInput(event.target.value)); 
+    dispatch(setValueInput(event.target.value)) 
 
     switch (toggleData) { 
       case 0: 
-        dispatch(setDataFiltered(startingData.filter(element => element.availability.stock === 0 && element.name.toLowerCase().includes(event.target.value.toLowerCase()))))
-        break;
+        dispatch(setDataFiltered(startingData.filter(element => element.availability.stock === 0 
+                                                     && element.name.toLowerCase().includes(event.target.value.toLowerCase()))))
+        break
       case 1: 
-        dispatch(setDataFiltered(startingData.filter(element => element.availability.stock > 0 && element.name.toLowerCase().includes(event.target.value.toLowerCase()))))
-        break;
+        dispatch(setDataFiltered(startingData.filter(element => element.availability.stock > 0 
+                                                     && element.name.toLowerCase().includes(event.target.value.toLowerCase()))))
+        break
       default: 
         dispatch(setDataFiltered(startingData.filter(element => element.name.toLowerCase().includes(event.target.value.toLowerCase()))))
     }
@@ -41,32 +38,30 @@ function Home() {
 
   // Funzione per resettare i valori nell'input di filtraggio e mostrare tutti i prodotti
   const resetSearch = () => {
-    dispatch(setToggleData(null));
-    dispatch(setClassToggleLeft('')); 
-    dispatch(setClassToggleRight(''));
-    dispatch(setValueInput(''));
-    dispatch(setDataFiltered(startingData));
+    dispatch(setInitialState())
   }
 
   // Funzione per filtrare i prodotti in base alla loro quantità in stock
   const checkIfInStock = (value) => {
     if (toggleData === value) { 
-      dispatch(setDataFiltered(startingData));
-      dispatch(setToggleData(null));
-      dispatch(setClassToggleLeft('')); 
-      dispatch(setClassToggleRight(''));
+      dispatch(setDataFiltered(startingData))
+      dispatch(setToggleData(null))
+      dispatch(setClassToggleLeft('')) 
+      dispatch(setClassToggleRight(''))
 
     } else {
 
       if (value === 1) { // Bottone IN STOCK
-        dispatch(setDataFiltered(startingData.filter(element => element.availability.stock > 0))); // Tutti gli elementi che hanno almeno un valore di quantità
-        dispatch(setToggleData(1));
+        dispatch(setDataFiltered(startingData.filter(element => element.availability.stock > 0 
+                                                     && element.name.toLowerCase().includes(valueInput.toLowerCase())))) 
+        dispatch(setToggleData(1))
         dispatch(setClassToggleLeft('toggleLabel')) 
         dispatch(setClassToggleRight(''))
 
       } else if (value === 0) { // Bottone OUT OF STOCK
-        dispatch(setDataFiltered(startingData.filter(element => element.availability.stock === 0))); // Solo gli elementi che non hanno valori di quantità
-        dispatch(setToggleData(0));
+        dispatch(setDataFiltered(startingData.filter(element => element.availability.stock === 0
+                                                     && element.name.toLowerCase().includes(valueInput.toLowerCase())))) 
+        dispatch(setToggleData(0))
         dispatch(setClassToggleRight('toggleLabel'))
         dispatch(setClassToggleLeft(''))
       }
@@ -100,4 +95,4 @@ function Home() {
   )
 }
 
-export default Home;
+export default Home

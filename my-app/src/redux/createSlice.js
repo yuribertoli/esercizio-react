@@ -7,7 +7,7 @@ const initialState = {
     valueInput: undefined,
     toggleData: null,
     classToggleLeft: '',
-    classToggleRight: '',
+    classToggleRight: ''
 }
 
 export const dataSlice = createSlice({
@@ -34,10 +34,17 @@ export const dataSlice = createSlice({
         },
         setClassToggleRight: (state, action) => {
             state.classToggleRight = action.payload
+        },
+        setInitialState: (state) => {
+            state.toggleData = initialState.toggleData
+            state.classToggleLeft = initialState.classToggleLeft
+            state.classToggleRight = initialState.classToggleRight
+            state.valueInput = initialState.valueInput
+            state.dataFiltered = state.startingData
         }
     }
 })
 
-export const { setStartingData, setLoading, setDataFiltered, setValueInput, setToggleData, setClassToggleLeft, setClassToggleRight } = dataSlice.actions
+export const { setInitialState, setStartingData, setLoading, setDataFiltered, setValueInput, setToggleData, setClassToggleLeft, setClassToggleRight } = dataSlice.actions
 
 export default dataSlice.reducer
