@@ -1,5 +1,5 @@
 import '../style/App.css'
-import React, { useEffect } from 'react'
+import React from 'react'
 import CheckStock from './CheckStock'
 import FilterSearch from './FilterSearch'
 import ListItem from './ListItem'
@@ -11,11 +11,6 @@ function Home() {
   const dispatch = useDispatch()
 
   const {startingData, dataFiltered, valueInput, toggleData, classToggleLeft, classToggleRight} = useSelector(state => state.data)
-
-  useEffect(()=>{
-    dispatch(setDataFiltered(startingData))
-    // eslint-disable-next-line
-  }, [])
 
   // Funzione per filtrare i prodotti da mostrare in base all'input dell'utente
   const filterProducts = (event) => {
@@ -43,7 +38,7 @@ function Home() {
 
   // Funzione per filtrare i prodotti in base alla loro quantità in stock
   const checkIfInStock = (value) => {
-    if (toggleData === value) {  //controllo se sto schiacciando lo stesso pulsante già selezionato in precedenza
+    if (toggleData === value) {  
       dispatch(setDataFiltered(startingData))
       dispatch(setToggleData(null))
       dispatch(setClassToggleLeft('')) 
