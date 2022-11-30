@@ -1,14 +1,14 @@
-import { useParams, Link } from "react-router-dom";
-import React from 'react';
-import Loading from './redirect/Loading';
-import { useSelector } from "react-redux";
-import NotFound from "./redirect/NotFound";
+import { useParams, Link } from "react-router-dom"
+import React from 'react'
+import Loading from './redirect/Loading'
+import { useSelector } from "react-redux"
+import NotFound from "./redirect/NotFound"
 
 const ProductDetails = () => {
 
-    const { idCode } = useParams();
+    const { idCode } = useParams()
 
-    const {startingData} = useSelector(state => state.data);
+    const {startingData} = useSelector(state => state.data)
 
     let objectFiltered = startingData.find(element => parseInt(element.UPC) === parseInt(idCode))
 
@@ -45,4 +45,4 @@ const ProductDetails = () => {
     )
 }
 
-export default ProductDetails;
+export default ProductDetails
