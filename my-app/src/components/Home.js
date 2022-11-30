@@ -39,7 +39,7 @@ function Home() {
   // Funzione per filtrare i prodotti in base alla loro quantità in stock
   const checkIfInStock = (value) => {
     if (toggleData === value) {  
-      dispatch(setDataFiltered(startingData))
+      dispatch(setDataFiltered(startingData.filter(el => el.name.toLowerCase().includes(valueInput.toLowerCase()))))
       dispatch(setToggleData(null))
       dispatch(setClassToggleLeft('')) 
       dispatch(setClassToggleRight(''))
