@@ -1,4 +1,9 @@
-const CheckStock = ({checkIfInStock, classToggleLeft, classToggleRight}) => {
+import { useSelector } from "react-redux"
+
+const CheckStock = ({ checkIfInStock }) => {
+  
+  const {classToggleLeft, classToggleRight} = useSelector(state => state.data)
+  
   return (
     <div id='checkStock'>
 

@@ -1,6 +1,10 @@
 import TextField from '@mui/material/TextField';
+import { useSelector } from "react-redux"
 
-const FilterSearch = ({ filterProducts, resetSearch, valueInput }) => {
+const FilterSearch = ({ filterProducts, resetSearch }) => {
+    
+    const {valueInput} = useSelector(state => state.data)
+    
     return (
         <div className="searchingBar">
             <TextField  value={valueInput || ''} 

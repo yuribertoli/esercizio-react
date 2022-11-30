@@ -70,9 +70,9 @@ function Home() {
 
         <div id='logo'>150x80</div>
 
-        <CheckStock checkIfInStock={checkIfInStock} classToggleLeft={classToggleLeft} classToggleRight={classToggleRight} />
+        <CheckStock checkIfInStock={checkIfInStock} />
 
-        <FilterSearch filterProducts={filterProducts} resetSearch={resetSearch} valueInput={valueInput} />
+        <FilterSearch filterProducts={filterProducts} resetSearch={resetSearch} />
 
       </header>
 
