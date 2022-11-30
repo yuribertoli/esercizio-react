@@ -4,7 +4,7 @@ const initialState = {
     startingData: [],
     isLoading: true,
     dataFiltered: [],
-    valueInput: undefined,
+    valueInput: '',
     toggleData: null,
     classToggleLeft: '',
     classToggleRight: ''
