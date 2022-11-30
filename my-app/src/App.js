@@ -1,16 +1,16 @@
-import { Outlet } from "react-router-dom";
-import React from 'react';
-import Footer from './components/Footer';
-import { useEffect } from "react";
-import Loading from "./components/Loading";
-import { useSelector, useDispatch } from "react-redux";
-import { setStartingData, setLoading, setDataFiltered } from "./redux/createSlice";
+import { Outlet } from "react-router-dom"
+import React from 'react'
+import Footer from './components/Footer'
+import { useEffect } from "react"
+import Loading from "./components/redirect/Loading"
+import { useSelector, useDispatch } from "react-redux"
+import { setStartingData, setLoading, setDataFiltered } from "./redux/createSlice"
 
 const App = () => {
 
-    const dispatch = useDispatch();
+    const dispatch = useDispatch()
 
-    const {isLoading} = useSelector(state => state.data);
+    const {isLoading} = useSelector(state => state.data)
 
     useEffect(() => {
         fetch('https://assets.fc-dev.instore.oakley.com/assets/products/products.json')
@@ -18,8 +18,7 @@ const App = () => {
                 if (response.ok) {
                     return response.json()
                 }
-                //throw new Error('Something went wrong');
-                return Promise.reject(response); //reject instead of throw Error
+                return Promise.reject(response) //reject and return the object response for seeing errors
             })
             .then(json => {
                 dispatch(setStartingData(json))
@@ -28,7 +27,7 @@ const App = () => {
             })
             .catch((error) => {
                 console.log(error)
-            });
+            })
     }, [dispatch])
 
     if (isLoading) {
@@ -48,4 +47,4 @@ const App = () => {
     )
 }
 
-export default App;
+export default App

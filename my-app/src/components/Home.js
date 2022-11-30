@@ -10,7 +10,7 @@ function Home() {
 
   const dispatch = useDispatch()
 
-  const {startingData, dataFiltered, valueInput, toggleData, classToggleLeft, classToggleRight} = useSelector(state => state.data)
+  const {startingData, dataFiltered, valueInput, toggleData} = useSelector(state => state.data)
 
   // Funzione per filtrare i prodotti da mostrare in base all'input dell'utente
   const filterProducts = (event) => {

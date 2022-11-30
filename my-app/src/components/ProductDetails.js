@@ -1,8 +1,8 @@
 import { useParams, Link } from "react-router-dom";
 import React from 'react';
-import Loading from './Loading';
+import Loading from './redirect/Loading';
 import { useSelector } from "react-redux";
-
+import NotFound from "./redirect/NotFound";
 
 const ProductDetails = () => {
 
@@ -17,7 +17,7 @@ const ProductDetails = () => {
     }
 
     if(objectFiltered === undefined){
-        return <h1>No elements to display</h1>
+        return <NotFound/>
     }
     
     return (

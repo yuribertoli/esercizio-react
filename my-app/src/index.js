@@ -1,13 +1,13 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import App from './App';
-import Home from './components/Home';
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import ProductDetails from './components/ProductDetails';
-
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+import App from './App'
+import Home from './components/Home'
+import { BrowserRouter, Routes, Route } from "react-router-dom"
+import ProductDetails from './components/ProductDetails'
+import NotFound from './components/redirect/NotFound'
 //redux:
-import { Provider } from 'react-redux';
-import { store } from './redux/store';
+import { Provider } from 'react-redux'
+import { store } from './redux/store'
 
 export default function Index() {
 
@@ -25,12 +25,14 @@ export default function Index() {
 
           </Route>
 
+          <Route path="*" element={<NotFound />} />
+
         </Routes>
 
       </BrowserRouter>
     </Provider>
-  );
+  )
 }
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(<Index />);
+const root = ReactDOM.createRoot(document.getElementById('root'))
+root.render(<Index />)
