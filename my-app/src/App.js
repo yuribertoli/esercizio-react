@@ -13,12 +13,12 @@ const App = () => {
     const {isLoading} = useSelector(state => state.data)
 
     useEffect(() => {
-        fetch('https://assets.fc-dev.instore.oakley.com/assets/products/products.json')
+        fetch('http://127.0.0.1:8080/lista-prodotti')
             .then((response) => {
                 if (response.ok) {
                     return response.json()
                 }
-                return Promise.reject(response) //reject and return the object response for seeing errors
+                return Promise.reject(response) 
             })
             .then(json => {
                 dispatch(setStartingData(json))

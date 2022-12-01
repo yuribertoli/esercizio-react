@@ -68,7 +68,7 @@ function Home() {
 
       <header>
 
-        <div id='logo'>150x80</div>
+        <div className='logo'>150x80</div>
 
         <CheckStock checkIfInStock={checkIfInStock} />
 

@@ -7,7 +7,9 @@ const initialState = {
     valueInput: '',
     toggleData: null,
     classToggleLeft: '',
-    classToggleRight: ''
+    classToggleRight: '',
+    productDetails: [],
+    sharingDetails: []
 }
 
 export const dataSlice = createSlice({
@@ -39,6 +41,12 @@ export const dataSlice = createSlice({
         setClassToggleRight: (state, action) => {
             state.classToggleRight = action.payload
         },
+        setProductDetails: (state, action) => {
+            state.productDetails = action.payload
+        },
+        setSharingDetails: (state, action) => {
+            state.sharingDetails = action.payload
+        },
         setInitialState: (state) => {
             state.toggleData = initialState.toggleData
             state.classToggleLeft = initialState.classToggleLeft
@@ -49,6 +57,6 @@ export const dataSlice = createSlice({
     }
 })
 
-export const { setInitialState, setStartingData, setLoading, setDataFiltered, setValueInput, setToggleData, setClassToggleLeft, setClassToggleRight } = dataSlice.actions
+export const { setSharingDetails, setProductDetails, setInitialState, setStartingData, setLoading, setDataFiltered, setValueInput, setToggleData, setClassToggleLeft, setClassToggleRight } = dataSlice.actions
 
 export default dataSlice.reducer

@@ -68,7 +68,7 @@ header {
   padding-right: 100px;
 }
 
-#logo {
+.logo {
   width: 150px;
   height: 80px;
   background-color: rgb(204, 204, 204);
@@ -284,4 +284,27 @@ footer {
 
 #footerList li a {
   text-decoration: none;
+}
+
+/* -----------------------PD DETAILS---------------------- */
+header#productDetailsHeader{
+  border-bottom: 1px solid black;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px
+}
+
+#ulDetails{
+  display: flex;
+  gap: 30px;
+}
+
+#ulDetails * {
+  height: 80px;
+  line-height: 80px;
+}
+
+#ulDetails li:first-child{
+  border-bottom: 3px solid black;
 }
