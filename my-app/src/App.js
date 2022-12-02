@@ -1,16 +1,14 @@
 import { Outlet } from "react-router-dom"
-import React from 'react'
+import React, {Suspense} from 'react'
 import Footer from './components/Footer'
 import { useEffect } from "react"
 import Loading from "./components/redirect/Loading"
-import { useSelector, useDispatch } from "react-redux"
-import { setStartingData, setLoading, setDataFiltered } from "./redux/createSlice"
+import { useDispatch } from "react-redux"
+import { setStartingData, setDataFiltered } from "./redux/createSlice"
 
 const App = () => {
 
     const dispatch = useDispatch()
-
-    const {isLoading} = useSelector(state => state.data)
 
     useEffect(() => {
         fetch('http://127.0.0.1:8080/lista-prodotti')
@@ -23,27 +21,24 @@ const App = () => {
             .then(json => {
                 dispatch(setStartingData(json))
                 dispatch(setDataFiltered(json))
-                dispatch(setLoading(false))
             })
             .catch((error) => {
                 console.log(error)
             })
     }, [dispatch])
 
-    if (isLoading) {
-        return <Loading />
-    }
-
     return (
-        <div id="container">
+        <Suspense fallback={<Loading />}>
+            <div id="container">
 
-            <Outlet />
+                <Outlet />
 
-            <footer>
-                <Footer />
-            </footer>
+                <footer>
+                    <Footer />
+                </footer>
 
-        </div>
+            </div>
+        </Suspense>
     )
 }
 

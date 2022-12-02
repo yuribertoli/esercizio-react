@@ -1,36 +1,19 @@
-import { useParams, Link } from "react-router-dom"
+import { Link } from "react-router-dom"
 import React from 'react'
 import Loading from './redirect/Loading'
 import { useSelector, useDispatch } from "react-redux"
 import NotFound from "./redirect/NotFound"
 import { useEffect } from "react"
-import { setProductDetails, setSharingDetails } from "../redux/createSlice"
+import { setStartingColor, setColorSelected } from "../redux/createSlice"
+import { StyledComponents as s } from "../style/components/productDetails"
 
 const ProductDetails = () => {
 
     const dispatch = useDispatch()
 
-    const { productDetails } = useSelector(state => state.data)
-    const { sharingDetails } = useSelector(state => state.data)
-
-    const { idCode } = useParams()
+    const { startingDetails, colorSelected } = useSelector(state => state.data)
 
     useEffect(() => {
-        //cerco il prodotto corrispondente al codice ID (non lo uso in questo caso, solo come esercizio)
-        fetch(`http://127.0.0.1:8080/product/${idCode}`)
-            .then((response) => {
-                if (response.ok) {
-                    return response.json()
-                }
-                return Promise.reject(response)
-            })
-            .then(json => {
-                dispatch(setProductDetails(json))
-            })
-            .catch((error) => {
-                console.log(error)
-            })
-        //carico i dati statici per tutti i prodotti
         fetch(`http://127.0.0.1:8080/lista-dettagli`)
             .then((response) => {
                 if (response.ok) {
@@ -39,18 +22,23 @@ const ProductDetails = () => {
                 return Promise.reject(response)
             })
             .then(json => {
-                dispatch(setSharingDetails(json))
+                dispatch(setStartingColor(json[0]))
+                dispatch(setColorSelected(json[0]))
             })
             .catch((error) => {
                 console.log(error)
             })
-    }, [dispatch, idCode])
+    }, [dispatch])
 
-    if (productDetails === null || sharingDetails.length === 0) {
+    const changeColor = (sunglass) => {
+        dispatch(setColorSelected(sunglass))
+    }
+
+    if ( startingDetails.length === 0) {
         return <Loading />
     }
 
-    if (productDetails === undefined || sharingDetails === undefined) {
+    if ( startingDetails === undefined) {
         return <NotFound />
     }
 
@@ -72,7 +60,34 @@ const ProductDetails = () => {
             </header>
 
             <main>
-                <div>{sharingDetails[0].name}</div>
+                <s.Container>
+                    <s.H1>{colorSelected.model}</s.H1>
+                    <s.GridContainer>
+                        <s.MainImg src={colorSelected.img} alt={colorSelected.name} />
+                        <s.UlDetails>
+                            <li>{colorSelected.brand}</li>
+                            <li>{colorSelected.price.current.value} {colorSelected.price.currency}</li>
+                            <li><span>Name:</span> {colorSelected.name}</li>
+                            <li><span>Lens color:</span> {colorSelected['lens-color']}</li>
+                            <li><span>Size:</span> {colorSelected.size}</li>
+                            <li><span>UPC:</span> {colorSelected.UPC}</li>
+                            <li><s.ButtonAddToCart>Add to cart</s.ButtonAddToCart></li>
+                        </s.UlDetails>
+                        <s.Colors>
+                            <h2>Available colors:</h2>
+                            <s.UlColors>
+                                {startingDetails['color-variants'].map(element => {
+                                    return <s.ImgColors 
+                                                onClick={()=> changeColor(element)} 
+                                                key={element.UPC} 
+                                                src={element.img} 
+                                                alt={element.name} 
+                                            />
+                                })}
+                            </s.UlColors>
+                        </s.Colors>
+                    </s.GridContainer>
+                </s.Container>
             </main>
 
             <Link to={`/`}>Back to Home Page</Link>

@@ -2,14 +2,13 @@ import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
     startingData: [],
-    isLoading: true,
     dataFiltered: [],
     valueInput: '',
     toggleData: null,
     classToggleLeft: '',
     classToggleRight: '',
-    productDetails: [],
-    sharingDetails: []
+    startingDetails: [],
+    colorSelected: {}
 }
 
 export const dataSlice = createSlice({
@@ -22,9 +21,6 @@ export const dataSlice = createSlice({
             } else {
                 throw new Error('Initial data cannot be changed')
             }
-        },
-        setLoading: (state, action) => {
-            state.isLoading = action.payload
         },
         setDataFiltered: (state, action) => {
             state.dataFiltered = action.payload
@@ -41,11 +37,11 @@ export const dataSlice = createSlice({
         setClassToggleRight: (state, action) => {
             state.classToggleRight = action.payload
         },
-        setProductDetails: (state, action) => {
-            state.productDetails = action.payload
+        setStartingColor: (state, action) => {
+            state.startingDetails = action.payload
         },
-        setSharingDetails: (state, action) => {
-            state.sharingDetails = action.payload
+        setColorSelected: (state, action) => {
+            state.colorSelected = action.payload
         },
         setInitialState: (state) => {
             state.toggleData = initialState.toggleData
@@ -57,6 +53,16 @@ export const dataSlice = createSlice({
     }
 })
 
-export const { setSharingDetails, setProductDetails, setInitialState, setStartingData, setLoading, setDataFiltered, setValueInput, setToggleData, setClassToggleLeft, setClassToggleRight } = dataSlice.actions
+export const { 
+    setColorSelected, 
+    setStartingColor, 
+    setInitialState, 
+    setStartingData, 
+    setDataFiltered, 
+    setValueInput, 
+    setToggleData, 
+    setClassToggleLeft, 
+    setClassToggleRight 
+} = dataSlice.actions
 
 export default dataSlice.reducer
